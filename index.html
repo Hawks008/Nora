@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 18th Birthday, Nora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1613;
+    --ink-soft:#2A211C;
+    --gold:#D4A62A;
+    --gold-soft:#E8C765;
+    --maroon:#8A2E2E;
+    --forest:#285C43;
+    --cream:#F7F1E3;
+    --cream-dim:#C9BFA9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Sora',sans-serif;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--gold-soft);
+    outline-offset:4px;
+  }
+
+  /* ---------- Texture ---------- */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:2; opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .kente-rule{
+    height:6px;
+    width:100%;
+    background:repeating-linear-gradient(90deg,
+      var(--gold) 0 24px,
+      var(--maroon) 24px 48px,
+      var(--forest) 48px 72px,
+      var(--cream) 72px 74px,
+      var(--ink) 74px 76px);
+    opacity:0.9;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:8vh 6vw 10vh;
+    overflow:hidden;
+  }
+  .hero-watermark{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-52%);
+    font-family:'Fraunces', serif;
+    font-size:min(62vw, 620px);
+    font-weight:600;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(212,166,42,0.16);
+    line-height:1;
+    z-index:0;
+    user-select:none;
+    pointer-events:none;
+  }
+  .eyebrow{
+    position:relative; z-index:1;
+    font-family:'Space Mono', monospace;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--gold-soft);
+    margin-bottom:1.6rem;
+    opacity:0;
+    animation:rise 0.9s 0.15s ease-out forwards;
+  }
+  .hero h1{
+    position:relative; z-index:1;
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(2.6rem, 8vw, 5.6rem);
+    line-height:1.05;
+    color:var(--cream);
+    opacity:0;
+    animation:rise 1s 0.35s ease-out forwards;
+  }
+  .hero h1 span{
+    display:block;
+    font-style:normal;
+    font-weight:600;
+    background:linear-gradient(100deg, var(--gold-soft), var(--gold) 60%, var(--maroon));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.sub{
+    position:relative; z-index:1;
+    max-width:36ch;
+    margin:1.8rem auto 0;
+    font-size:1.05rem;
+    line-height:1.7;
+    color:var(--cream-dim);
+    opacity:0;
+    animation:rise 1s 0.6s ease-out forwards;
+  }
+
+  /* key + keyhole signature */
+  .key-wrap{
+    position:relative; z-index:1;
+    margin-top:3.2rem;
+    width:120px; height:120px;
+    opacity:0;
+    animation:rise 1s 0.8s ease-out forwards;
+  }
+  .keyhole{ width:100%; height:100%; }
+  .key-glyph{
+    transform-origin:60px 60px;
+    animation:turnKey 3.5s 1.6s cubic-bezier(.6,-0.1,.3,1.3) 1;
+  }
+  @keyframes turnKey{
+    0%{ transform:rotate(-28deg); }
+    35%{ transform:rotate(6deg); }
+    55%{ transform:rotate(-4deg); }
+    70%{ transform:rotate(2deg); }
+    100%{ transform:rotate(0deg); }
+  }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(16px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .scroll-cue{
+    position:absolute; bottom:2.6rem; left:50%; transform:translateX(-50%);
+    font-family:'Space Mono', monospace;
+    font-size:0.65rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--cream-dim);
+    display:flex; flex-direction:column; align-items:center; gap:0.6rem;
+    z-index:1;
+  }
+  .scroll-cue::after{
+    content:"";
+    width:1px; height:34px;
+    background:linear-gradient(var(--gold), transparent);
+    animation:drip 1.8s ease-in-out infinite;
+  }
+  @keyframes drip{ 0%{opacity:0.2;} 50%{opacity:1;} 100%{opacity:0.2;} }
+
+  /* ---------- Sections ---------- */
+  section{ padding:9vh 7vw; position:relative; }
+  .section-inner{ max-width:920px; margin:0 auto; }
+
+  .label{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    display:flex; align-items:center; gap:0.8rem;
+    margin-bottom:1.4rem;
+  }
+  .label::before{
+    content:"";
+    width:28px; height:1px;
+    background:var(--gold-soft);
+  }
+
+  .letter h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(1.9rem, 4vw, 2.8rem);
+    color:var(--cream);
+    margin-bottom:1.6rem;
+    max-width:16ch;
+  }
+  .letter p{
+    font-size:1.05rem;
+    line-height:1.95;
+    color:var(--cream-dim);
+    max-width:62ch;
+  }
+  .letter p + p{ margin-top:1.3rem; }
+  .signoff{
+    margin-top:2.4rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.2rem;
+    color:var(--gold-soft);
+  }
+
+  /* ---------- Milestones strip ---------- */
+  .milestones{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:rgba(212,166,42,0.18);
+    border-top:1px solid rgba(212,166,42,0.18);
+    border-bottom:1px solid rgba(212,166,42,0.18);
+  }
+  .milestone{
+    background:var(--ink);
+    padding:3.2rem 1.5rem;
+    text-align:center;
+  }
+  .milestone .num{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:2.6rem;
+    color:var(--gold);
+  }
+  .milestone .cap{
+    margin-top:0.6rem;
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--cream-dim);
+  }
+
+  /* ---------- Video gallery ---------- */
+  .gallery-head{ text-align:center; margin-bottom:3rem; }
+  .gallery-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+  }
+  .reel-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+    gap:2rem;
+    max-width:820px;
+    margin:0 auto;
+  }
+  .reel-card{
+    position:relative;
+    border-radius:2px;
+    overflow:hidden;
+    aspect-ratio:9/16;
+    background:var(--ink-soft);
+    border:1px solid rgba(212,166,42,0.25);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+    transition:transform 0.5s ease, box-shadow 0.5s ease;
+  }
+  .reel-card:hover{ transform:translateY(-6px); box-shadow:0 40px 70px -20px rgba(0,0,0,0.7); }
+  .reel-card video{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .reel-tag{
+    position:absolute; top:0.8rem; left:0.8rem;
+    font-family:'Space Mono', monospace;
+    font-size:0.6rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    background:rgba(27,22,19,0.65);
+    backdrop-filter:blur(4px);
+    color:var(--gold-soft);
+    padding:0.35rem 0.6rem;
+    border:1px solid rgba(212,166,42,0.3);
+  }
+
+  /* ---------- Photo placeholders ---------- */
+  .photo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap:1rem;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .photo-slot{
+    aspect-ratio:4/5;
+    border:1px dashed rgba(212,166,42,0.4);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono', monospace;
+    font-size:0.6rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:rgba(201,191,169,0.5);
+    text-align:center;
+    padding:1rem;
+    background:
+      linear-gradient(135deg, transparent 48%, rgba(212,166,42,0.08) 50%, transparent 52%);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:6vh 7vw 8vh;
+    text-align:center;
+  }
+  footer .name{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1.6rem, 4vw, 2.4rem);
+    color:var(--gold-soft);
+  }
+  footer .tiny{
+    margin-top:1rem;
+    font-family:'Space Mono', monospace;
+    font-size:0.65rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--cream-dim);
+    opacity:0.6;
+  }
+
+  @media (max-width:640px){
+    .milestones{ grid-template-columns:1fr; }
+    .milestone{ padding:2.2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-watermark">18</div>
+  <p class="eyebrow">A key to the door &mdash; July 30</p>
+  <h1>Happy 18th Birthday<span>Nora Francisca Amoakohene</span></h1>
+  <p class="sub">Eighteen years in the making, and every one of them led here. Today's yours &mdash; hold onto it.</p>
+
+  <div class="key-wrap">
+    <svg class="keyhole" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="56" stroke="#D4A62A" stroke-opacity="0.35" stroke-width="1"/>
+      <g class="key-glyph">
+        <circle cx="60" cy="46" r="15" stroke="#E8C765" stroke-width="3"/>
+        <rect x="57" y="60" width="6" height="34" fill="#E8C765"/>
+        <rect x="63" y="78" width="10" height="5" fill="#E8C765"/>
+        <rect x="63" y="87" width="8" height="5" fill="#E8C765"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="scroll-cue">Scroll</div>
+</section>
+
+<div class="kente-rule"></div>
+
+<!-- LETTER -->
+<section class="letter">
+  <div class="section-inner">
+    <div class="label">To Nora</div>
+    <h2>Eighteen looks so good on you.</h2>
+    <p>I wanted you to have something today that's just yours to open &mdash; no cake required, though I hope there's plenty of that too. Eighteen is a big one. It's the birthday where the door actually opens: new keys, new choices, a whole stretch of road that's officially yours to walk.</p>
+    <p>Whatever this year brings, I hope it hands you exactly the kind of joy you deserve &mdash; the loud kind, the quiet kind, and everything in between. I'm just glad I get a front-row seat to it.</p>
+    <p>Here's to the girl turning eighteen today, and to every version of you still to come.</p>
+    <p class="signoff">Happy birthday, Nora. I love you.</p>
+  </div>
+</section>
+
+<!-- MILESTONE STRIP -->
+<div class="milestones">
+  <div class="milestone"><div class="num">18</div><div class="cap">Years of you</div></div>
+  <div class="milestone"><div class="num">01</div><div class="cap">Key to the door</div></div>
+  <div class="milestone"><div class="num">&infin;</div><div class="cap">Reasons to celebrate</div></div>
+</div>
+
+<!-- VIDEO GALLERY -->
+<section>
+  <div class="section-inner">
+    <div class="gallery-head">
+      <div class="label" style="justify-content:center;">Moments</div>
+      <h2>A little reel of you</h2>
+    </div>
+    <div class="reel-grid">
+      <div class="reel-card">
+        <span class="reel-tag">Clip 01</span>
+        <video src="videos/clip-01.mp4" controls playsinline preload="metadata"></video>
+      </div>
+      <div class="reel-card">
+        <span class="reel-tag">Clip 02</span>
+        <video src="videos/clip-02.mp4" controls playsinline preload="metadata"></video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY PLACEHOLDER -->
+<section>
+  <div class="section-inner">
+    <div class="gallery-head">
+      <div class="label" style="justify-content:center;">Gallery</div>
+      <h2>More to come</h2>
+    </div>
+    <div class="photo-grid">
+      <div class="photo-slot">Photo coming soon</div>
+      <div class="photo-slot">Photo coming soon</div>
+      <div class="photo-slot">Photo coming soon</div>
+      <div class="photo-slot">Photo coming soon</div>
+      <div class="photo-slot">Photo coming soon</div>
+    </div>
+  </div>
+</section>
+
+<div class="kente-rule"></div>
+
+<footer>
+  <div class="name">Nora Francisca Amoakohene</div>
+  <div class="tiny">Eighteen &middot; and just getting started</div>
+</footer>
+
+</body>
+</html>
